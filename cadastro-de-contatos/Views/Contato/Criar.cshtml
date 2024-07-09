@@ -1,0 +1,45 @@
+﻿@model ContatoModel
+
+@*para a integração com a model, voce precisa chamar a model com @Model e o nome da model.*@
+
+@{
+    ViewData["Title"] = "Cadastrar contato";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Cadastrar contato</h1>
+    <br />
+</div>
+
+@*
+    para configurar a tag é só dar um asp-controller e colocar o controller. no caso: Contato  
+    é necessario configurar a ação dele também. ai, é só umar o asp-action com o metodo que esta dentro do contato. no caso Criar
+    também é necessario configurar qual metodo ele vai usar para fazer a requisição. no caso, post. 
+*@
+<form asp-controller="Contato" asp-action="Criar" method="post">
+    @*
+        dentro de cada imput, é necessario fazer o mapiamento, para o codigo saber pra onde vai cada coisa.
+        para isso ser feito, é só colocar asp-for e colocar o atributo que faz parte de cada imput de dados. 
+    *@
+    <div class="mb-3">
+        <label for="nome">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Nome do contato">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" asp-for="Email" class="form-control" placeholder="Email do contato">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1">Telefone</label>
+        <input type="number" asp-for="Telefone" class="form-control" placeholder="Telefone do contato">
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        @*esse botão é do tipo submit. eu preciso configurar o submit dele na tag form*@
+        <button type="submit" class="btn btn-primary">Criar contato</button>
+        <a role="button" class="btn btn-segundary" asp-controller="Contato" asp-action="Index">Voltar</a>
+    </div>
+</form>

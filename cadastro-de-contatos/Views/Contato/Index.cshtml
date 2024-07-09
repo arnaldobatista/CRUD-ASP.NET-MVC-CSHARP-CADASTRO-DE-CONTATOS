@@ -1,0 +1,56 @@
+﻿@model List<ContatoModel>
+
+@{
+    ViewData["Title"] = "Listagem de contatos";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Listagem de contatos</h1>
+    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        @*pra voce poder colocar uma roda em um botão, voce pode usar o asp-controller*@
+        @*voce vai passar qual controller que ele vai entrar e qual metodo ele vai usar. usando o asp-action*@
+        <a role="button" class="btn btn-primary" asp-controller="Contato" asp-action="Criar">Criar Contato</a>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @*
+                só pra lembrar, quando voce quiser escrever codigo c# junto com html, é só colocar @ e escrever o codigo
+                é bem "parecido com react"
+            *@
+
+            @if(Model != null && Model.Any())
+            {
+                foreach (ContatoModel contato in Model)
+                {
+                    <tr>
+                        <th scope="row">@contato.Id</th>
+                        <td>@contato.Nome</td>
+                        <td>@contato.Email</td>
+                        <td>@contato.Telefone</td>
+                        <td>
+                           @*
+                                quando voce for editar ou excluir um dado, ele precisa pegar o ID do dado para saber o que ele vai fazer
+                           *@
+                            <a role="button" class="btn btn-info" asp-controller="Contato" asp-action="Editar" asp-route-id="@contato.Id">Editar</a>
+                            <a role="button" class="btn btn-danger" asp-controller="Contato" asp-action="ApagarConfirmacao" asp-route-id="@contato.Id">Excluir</a>
+                        </td>
+                    </tr>       
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
